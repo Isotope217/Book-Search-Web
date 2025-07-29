@@ -1,0 +1,53 @@
+$primary-color: #333;
+
+.container {
+  max-width: 600px;
+  margin: 2rem auto;
+  font-family: Arial, sans-serif;
+
+  h2 {
+    color: $primary-color;
+    margin-bottom: 1rem;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+
+    li {
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #eee;
+    }
+  }
+
+  .filter {
+    margin-bottom: 1rem;
+
+    label {
+      margin-right: 0.5rem;
+      font-weight: bold;
+    }
+
+    select {
+      padding: 0.3rem;
+      font-size: 1rem;
+    }
+  }
+
+  .loading {
+    font-style: italic;
+  }
+
+  .error {
+    color: red;
+  }
+}

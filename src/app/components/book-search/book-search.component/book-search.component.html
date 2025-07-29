@@ -1,0 +1,20 @@
+<div class="container">
+  <h2>Book Search</h2>
+  <input [formControl]="searchControl" placeholder="Search by title, author, genre" />
+  <div class="filter">
+    <label for="rating">Filter by Rating:</label>
+    <select [formControl]="ratingControl" id="rating">
+        <option value="">All Ratings</option>
+        <option *ngFor="let r of [5, 4, 3, 2, 1]" [value]="r">{{ r }} Stars</option>
+    </select>
+    </div>
+  
+  <div *ngIf="loading">Loading...</div>
+  <div *ngIf="error">{{ error }}</div>
+  <ul *ngIf="!loading && books.length > 0">
+    <li *ngFor="let book of books">
+      <strong>{{ book.name }}</strong> by {{ book.author }} ({{ book.rating }}, {{ book.price }})
+    </li>
+  </ul>
+  <p *ngIf="!loading && books.length === 0 && searchControl.value">No books found.</p>
+</div>

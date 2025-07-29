@@ -1,0 +1,24 @@
+.body {
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+.brand-header {
+    background: #0c0b0c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    color: #fff;
+
+    .brand-logo {
+        width: 150px;
+        position: absolute;
+        left: 1rem;
+    }
+
+    .brand-title {
+        font-size: 3.5rem;
+        text-align: center;
+        margin: 0;
+    }
+}
