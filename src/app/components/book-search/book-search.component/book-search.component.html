@@ -1,20 +1,63 @@
 <div class="container">
   <h2>Book Search</h2>
-  <input [formControl]="searchControl" placeholder="Search by title, author, genre" />
+  <input [formControl]="searchControl" placeholder="Search by title or author" />
   <div class="filter">
     <label for="rating">Filter by Rating:</label>
     <select [formControl]="ratingControl" id="rating">
         <option value="">All Ratings</option>
-        <option *ngFor="let r of [5, 4, 3, 2, 1]" [value]="r">{{ r }} Stars</option>
+        <option *ngFor="let r of ratings" [value]="r">{{ r }} Stars</option>
     </select>
     </div>
   
   <div *ngIf="loading">Loading...</div>
   <div *ngIf="error">{{ error }}</div>
-  <ul *ngIf="!loading && books.length > 0">
-    <li *ngFor="let book of books">
-      <strong>{{ book.name }}</strong> by {{ book.author }} ({{ book.rating }}, {{ book.price }})
-    </li>
-  </ul>
+  <table *ngIf="!loading && books.length > 0" class="book-table" aria-describedby="bookTableCaption">
+    <caption id="bookTableCaption" class="visually-hidden">List of books with name, author, rating, and price</caption>
+    <thead>
+      <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Author</th>
+        <th scope="col">Rating</th>
+        <th scope="col">Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of books">
+        <td>{{ book.name }}</td>
+        <td>{{ book.author }}</td>
+        <td>{{ book.rating }}</td>
+        <td>{{ book.price | currency:'GBP' }}</td>
+      </tr>
+    </tbody>
+  </table>
   <p *ngIf="!loading && books.length === 0 && searchControl.value">No books found.</p>
+
+  <form [formGroup]="addBookForm" (ngSubmit)="addBook()" aria-labelledby="add-book-heading">
+  <h3 id="add-book-heading">Add New Book</h3>
+
+  <div class="form-group">
+    <label for="book-name">Book name</label>
+    <input id="book-name" formControlName="name" type="text" required />
+  </div>
+
+  <div class="form-group">
+    <label for="book-author">Author</label>
+    <input id="book-author" formControlName="author" type="text" required />
+  </div>
+
+  <div class="form-group">
+    <label for="book-price">Price</label>
+    <input id="book-price" formControlName="price" type="number" required />
+  </div>
+
+  <div class="form-group">
+    <label for="book-rating">Rating</label>
+    <select id="book-rating" formControlName="rating" required>
+      <option value="">Select Rating</option>
+      <option *ngFor="let r of ratings" [value]="r">{{ r }} Stars</option>
+    </select>
+  </div>
+
+  <button type="submit" [disabled]="addBookForm.invalid">Add Book</button>
+</form>
 </div>
